@@ -2,7 +2,7 @@ import 'package:beautified_widgets/beautified_color_themes.dart';
 import 'package:flutter/material.dart';
 
 // Defining different types of button
-enum Buttons{
+enum BeautifiedButtonStyles{
   primary,
   primaryDark,
   primaryLight,
@@ -14,17 +14,22 @@ enum Buttons{
   googleCircle,
   facebookCircle,
   twitterCircle,
-  googleRectangle,
-  facebookRectangle,
-  twitterRectangle,
+  githubCircle,
+  microsoftCircle,
+  emailCircle,
+  customButton,
+  customCircularIconButton
 }
 
 // Styling Button
 class BeautifiedButton extends StatelessWidget{
-  const BeautifiedButton({Key? key,required this.buttonType, required this.buttonText ,required this.onClick}) : super(key: key);
-  final Buttons buttonType;
-  final String buttonText;
-  final Function? onClick;
+  const BeautifiedButton({Key? key,required this.buttonType, this.buttonText ,required this.onPressed, this.backgroundColor, this.foregroundColor, this.icon}) : super(key: key);
+  final BeautifiedButtonStyles buttonType;
+  final String? buttonText;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final IconData? icon;
+  final Function? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +38,41 @@ class BeautifiedButton extends StatelessWidget{
     double width = MediaQuery.of(context).size.width;
     // Selecting Button Type
     switch(buttonType){
-      case Buttons.primary:
-        return getTextButton(baseColorTheme["primary"]!,baseColorTheme["light"]!,height,width);
-      case Buttons.primaryDark:
-        return getTextButton(baseColorTheme["primaryDark"]!,baseColorTheme["light"]!,height,width);
-      case Buttons.primaryLight:
-        return getTextButton(baseColorTheme["primaryLight"]!,baseColorTheme["dark"]!,height,width);
-      case Buttons.secondary:
-        return getTextButton(baseColorTheme["secondary"]!,baseColorTheme["dark"]!,height,width);
-      case Buttons.success:
-        return getTextButton(baseColorTheme["success"]!,baseColorTheme["light"]!,height,width);
-      case Buttons.danger:
-        return getTextButton(baseColorTheme["danger"]!,baseColorTheme["light"]!,height,width);
-      case Buttons.dark:
-        return getTextButton(baseColorTheme["dark"]!,baseColorTheme["light"]!,height,width);
+      case BeautifiedButtonStyles.primary:
+        return getTextButton(BaseColorThemes.primary,BaseColorThemes.light,height,width);
+      case BeautifiedButtonStyles.primaryDark:
+        return getTextButton(BaseColorThemes.primaryDark,BaseColorThemes.light,height,width);
+      case BeautifiedButtonStyles.primaryLight:
+        return getTextButton(BaseColorThemes.primaryLight,BaseColorThemes.dark,height,width);
+      case BeautifiedButtonStyles.secondary:
+        return getTextButton(BaseColorThemes.secondary,BaseColorThemes.dark,height,width);
+      case BeautifiedButtonStyles.success:
+        return getTextButton(BaseColorThemes.success,BaseColorThemes.light,height,width);
+      case BeautifiedButtonStyles.danger:
+        return getTextButton(BaseColorThemes.danger,BaseColorThemes.light,height,width);
+      case BeautifiedButtonStyles.dark:
+        return getTextButton(BaseColorThemes.dark,BaseColorThemes.light,height,width);
+
+      case BeautifiedButtonStyles.customButton:
+        return getTextButton(backgroundColor!, foregroundColor!, height, width);
+      case BeautifiedButtonStyles.customCircularIconButton:
+
+        return Container(child: GestureDetector(onTap: (){onPressed!();},child: Icon(icon),),margin: EdgeInsets.all((width*1.5)/100), height: (width*20)/100, width: (width*20)/100,);
+
+      case BeautifiedButtonStyles.googleCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/google.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent,), width);
+      case BeautifiedButtonStyles.facebookCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/facebook.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent), width);
+      case BeautifiedButtonStyles.twitterCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/twitter.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent), width);
+      case BeautifiedButtonStyles.microsoftCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/microsoft.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent,), width);
+      case BeautifiedButtonStyles.githubCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/github.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent), width);
+      case BeautifiedButtonStyles.emailCircle:
+        return getRoundSocialMediaButton(CircleAvatar(backgroundImage: const AssetImage("assets/icons/email.png",package: "beautified_widgets"),backgroundColor: BaseColorThemes.transparent), width);
       default:
-        return getTextButton(baseColorTheme["light"]!,baseColorTheme["dark"]!,height,width);
+        return getTextButton(BaseColorThemes.light,BaseColorThemes.dark,height,width);
     }
   }
 
@@ -61,9 +85,13 @@ class BeautifiedButton extends StatelessWidget{
           backgroundColor: bgColor,
         ),
 
-        onPressed: (){onClick!();},
-        child: Text(buttonText, style: TextStyle(fontSize: ((height*2.5)/100), color: frColor),)
+        onPressed: (){onPressed!();},
+        child: Text(buttonText!, style: TextStyle(fontSize: ((height*2.5)/100), color: frColor),)
     );
   }
 
+  // Returning Buttons for Circular Social Media Buttons
+  Widget getRoundSocialMediaButton(CircleAvatar image,double width){
+    return Container(child: GestureDetector(onTap: (){onPressed!();},child: image,),margin: EdgeInsets.all((width*1.5)/100), height: (width*20)/100, width: (width*20)/100,);
+  }
 }
