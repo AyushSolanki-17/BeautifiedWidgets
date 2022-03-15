@@ -52,6 +52,7 @@ BeautifiedText(textStyles: BeautifiedTextStyles.bold, text: "This is Bold Text")
 BeautifiedText(textStyles: BeautifiedTextStyles.italic, text: "This is Italic Text")
 ```
 
+<img src="https://github.com/AyushSolanki-17/BeautifiedWidgets/blob/main/sampleimages/Typography.jpeg" width="500" height="500" />
 
 ### Beautified Buttons
 
@@ -83,6 +84,9 @@ BeautifiedButton(buttonType: BeautifiedButtonStyles.danger, onPressed: (){},butt
 
 ```
 
+<img src="https://github.com/AyushSolanki-17/BeautifiedWidgets/blob/main/sampleimages/Buttons.jpeg" width="500" height="500" />
+
+
 #### Social Media Buttons
 
 We also have social media buttons for social media intergration. dont forget to check out them :)
@@ -103,3 +107,5 @@ BeautifiedButton(buttonType: BeautifiedButtonStyles.githubRectangle, onPressed: 
 // Microsoft Button
 BeautifiedButton(buttonType: BeautifiedButtonStyles.microsoftRectangle, onPressed: (){},buttonText: "SignIn With Microsoft",)
 ```
+
+<img src="https://github.com/AyushSolanki-17/BeautifiedWidgets/blob/main/sampleimages/SocialButtons.jpeg" width="500" height="500" />
