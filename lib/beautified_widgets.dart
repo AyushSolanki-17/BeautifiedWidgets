@@ -2,6 +2,7 @@ library beautified_widgets;
 
 import 'package:flutter/cupertino.dart';
 
+
 class BeautifiedContainer extends StatelessWidget{
   const BeautifiedContainer({Key? key, required this.child}) : super(key: key);
   final Widget child;
@@ -28,6 +29,5 @@ class PaddedContainer extends StatelessWidget{
       child: child,
     );
   }
-
 }
 

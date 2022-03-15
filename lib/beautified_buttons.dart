@@ -238,6 +238,7 @@ class BeautifiedButton extends StatelessWidget {
       Color bgColor, Color frColor, double height, double width) {
     return TextButton(
         style: TextButton.styleFrom(
+          minimumSize: Size.fromHeight(((height * 2.5) / 100)),
           padding: EdgeInsets.symmetric(
               vertical: (height * 1.5) / 100, horizontal: (width * 2.0) / 100),
           backgroundColor: bgColor,
@@ -270,6 +271,8 @@ class BeautifiedButton extends StatelessWidget {
   Widget getRectangularSocialButtons(
       AssetImage image, String? text, double width) {
     return Container(
+      width: double.infinity,
+        height: ((width * 2.5) / 100),
         child: GestureDetector(
           onTap: () {
             onPressed!();
